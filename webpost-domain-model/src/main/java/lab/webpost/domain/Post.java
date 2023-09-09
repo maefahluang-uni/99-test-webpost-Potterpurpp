@@ -8,8 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -17,16 +19,20 @@ import lab.jackson.LocalDateTimeDeserializer;
 import lab.jackson.LocalDateTimeSerializer;
 
 //TODO: add annotation for entity
-
+@Entity
 public class Post {
 
     //TODO: add annotation for id
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String title;
     private String body;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime createdAt;
-
+    @ManyToOne(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id" , referencedColumnName = "id")
     private User author;
 
     
@@ -59,6 +65,8 @@ public class Post {
     }
 
     //TODO: add the JSONSerialze and JsonDeserialize
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }

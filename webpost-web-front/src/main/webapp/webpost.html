@@ -24,6 +24,7 @@
         }
         // Function to fetch and display posts
         function fetchPosts() {
+            $("#postList").html(""); // Clear concert list
             $.ajax({
                 url: 'http://localhost:8080/posts', // Replace with your backend API URL to fetch posts
                 method: 'GET',
