@@ -29,7 +29,6 @@ public class Post {
 
     private String title;
     private String body;
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime createdAt;
     @ManyToOne(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id" , referencedColumnName = "id")
