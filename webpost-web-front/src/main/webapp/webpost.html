@@ -15,6 +15,7 @@
     </form>
     <div id="postList">
         <!-- Posts will be displayed here -->
+      
     </div>
     <script>
         // Fetch the username from localStorage
@@ -33,7 +34,7 @@
                     var postList = $('#postList');
                     postList.empty(); // Clear previous posts
                     response.forEach(function (post) {
-                        var postItem = $('<div class="post-item"><strong>' + post.author.username + '</strong>: ' + post.body + '</div>');
+                        var postItem = $('<div class="post-item"><strong>' + post.title + '</strong>: ' + post.body + '</div>');
                         postList.append(postItem);
                     });
                 },
